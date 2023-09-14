@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-user
+      author: users-team
+      changes:
+        - createTable:
+            tableName: Users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+
+
+  - changeSet:
+      id: add-foreign-key-constraint
+      author: users-team
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: Users
+            baseColumnNames: role_id
+            referencedTableName: Role
+            referencedColumnNames: id
+            constraintName: FK_Users_Roles
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+  - changeSet:
+      id: add-index-on-username
+      author: yourname
+      changes:
+        - createIndex:
+            tableName: Users
+            indexName: idx_username
+            unique: true
+            columns:
+              - column:
+                  name: username

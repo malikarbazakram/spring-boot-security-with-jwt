@@ -1,0 +1,28 @@
+application:
+  name: users
+jpa:
+  open-in-view: false
+  hibernate:
+    ddl-auto: none
+datasource:
+  url: ${users.db.url}
+  username: ${users.db.username}
+  password: ${users.db.password}
+h2:
+  console:
+    enabled: true
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}] ${HOSTNAME}"
+  level:
+    sql: debug
+    web: debug
+    '[io.github.merite.training]': debug
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: always
